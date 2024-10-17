@@ -1,0 +1,42 @@
+package Pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class LoginPage {
+	
+	 WebDriver driver;
+	    LoginPage loginPage;
+
+	    @Given("I am on the OpenCart login page")
+	    public void i_am_on_the_open_cart_login_page() {
+	        WebDriverManager.chromedriver().setup();
+	        driver = new ChromeDriver();
+	        driver.manage().window().maximize();
+	        driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login");
+
+	        // Create LoginPage object
+	        loginPage = new LoginPage(driver);
+	    }
+
+	    @Given("I have entered a valid email and password")
+	    public void i_have_entered_a_valid_email_and_password() {
+	        loginPage.enterEmail("qatestertest@gmail.com");
+	        loginPage.enterPassword("Test@123");
+	    }
+
+	    @When("I click on the login button")
+	    public void i_click_on_the_login_button() {
+	        loginPage.clickLoginButton();
+	    }
+
+	    @Then("I should be logged in successfully")
+	    public void i_should_be_logged_in_successfully() {
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	        wait.until(ExpectedConditions.titleContains("My Account"));
+	        System.out.println("Page title is: " + driver.getTitle());
+	        driver.quit();
+	    }
+
+}

@@ -1,0 +1,38 @@
+package Pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class LoginPage {
+	
+	WebDriver driver;
+	this.driver=driver;
+	//By locator
+	  // Create LoginPage object
+    LoginPage loginPage = new LoginPage(driver);
+    
+	private By emailInputLocator =By.name("email");
+	private By PasswordInputLocator =By.name("password");
+	private By Login_ButtonLocator =By.xpath("//input[@type='submit']");
+	
+	//constructor
+	public LoginPage(WebDriver driver) {
+		this.driver=driver;
+	}
+	//Methods
+	
+	public void enterEmail(String email) {
+		WebElement emailInput =driver.findElement(emailInputLocator);
+		emailInput.sendKeys(email);
+	}
+	public void enterPassword(String password) {
+		WebElement passwordInput =driver.findElement(PasswordInputLocator);
+		passwordInput.sendKeys(password);
+	}
+	public void clickLoginButton() {
+		WebElement Loginbtn =driver.findElement(Login_ButtonLocator);
+		Loginbtn.click();
+	}
+
+}
